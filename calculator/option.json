@@ -1,0 +1,16 @@
+{
+  "color": {
+    "theme": "#181818",
+    "title": "#212121",
+    "border": "#dddddd",
+    "button_text": "#dddddd",
+    "number": {
+      "fg": "#212121",
+      "hover": "#313131"
+    },
+    "command": {
+      "fg": "#345678",
+      "hover": "#456789"
+    }
+  }
+}

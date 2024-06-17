@@ -12,7 +12,7 @@ from PIL import Image, ImageColor, ImageEnhance
 TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR"
 TESSDATA_PATH = r"C:\Program Files\Tesseract-OCR\tessdata"
 IMAGE_DIR = os.path.join(os.path.dirname(__file__), "icon")
-DIR = os.path.join(os.path.dirname(__file__), "caluclator")
+
 
 WINDOW_WIDTH = 300
 WINDOW_HEIGHT = 402
@@ -79,11 +79,11 @@ class Calculator(ctk.CTk):
         self.window_drag()
 
     def load_option(self):
-        if not os.path.isfile(r"calculator/calculator/option.json"):
-            with open(r"calculator/option.json", "w") as f:
+        if not os.path.isfile(r"./option.json"):
+            with open(r"./option.json", "w") as f:
                 json.dump(self.dj, f, indent=2)
         else:
-            with open(r"calculator/option.json") as f:
+            with open(r"./option.json") as f:
                 self.dj = json.load(f)
 
     def set_ctkform(self):
@@ -685,13 +685,13 @@ class Calculator(ctk.CTk):
         self.dj["color"]["command"]["hover"] = COM_HOVER_COLOR
         self.dj["color"]["button_text"] = BUTTONTEXT_COLOR
 
-        with open(r"calculator/option.json", "w") as f:
+        with open(r"./option.json", "w") as f:
             json.dump(self.dj, f, indent=2)
         self.set_button()
 
         if self.dj["color"]["theme"] != THEME_COLOR:
             self.dj["color"]["theme"] = THEME_COLOR
-            with open(r"calculator/option.json", "w") as f:
+            with open(r"./option.json", "w") as f:
                 json.dump(self.dj, f, indent=2)
             self.main_frame.destroy()
             self.option_flag = 0
@@ -703,7 +703,7 @@ class Calculator(ctk.CTk):
 
         if self.dj["color"]["border"] != BORDER_COLOR:
             self.dj["color"]["border"] = BORDER_COLOR
-            with open(r"calculator/option.json", "w") as f:
+            with open(r"./option.json", "w") as f:
                 json.dump(self.dj, f, indent=2)
             self.main_frame.destroy()
             self.option_flag = 0
@@ -739,7 +739,7 @@ class Calculator(ctk.CTk):
             self.dj["color"]["number"]["fg"] = num_color
             self.dj["color"]["number"]["hover"] = num_hover_color
 
-            with open(r"calculator/option.json", "w") as f:
+            with open(r"./option.json", "w") as f:
                 json.dump(self.dj, f, indent=2)
             self.set_button()
 
@@ -751,7 +751,7 @@ class Calculator(ctk.CTk):
             self.dj["color"]["command"]["fg"] = com_color
             self.dj["color"]["command"]["hover"] = com_hover_color
 
-            with open(r"calculator/option.json", "w") as f:
+            with open(r"./option.json", "w") as f:
                 json.dump(self.dj, f, indent=2)
             self.set_button()
             self.dif_button.destroy()
@@ -780,7 +780,7 @@ class Calculator(ctk.CTk):
 
             self.dj["color"]["button_text"] = text_color
 
-            with open(r"calculator/option.json", "w") as f:
+            with open(r"./option.json", "w") as f:
                 json.dump(self.dj, f, indent=2)
             self.set_button()
 
@@ -789,7 +789,7 @@ class Calculator(ctk.CTk):
         if select_color[1]:
             self.dj["color"]["theme"] = select_color[1]
 
-            with open(r"calculator/option.json", "w") as f:
+            with open(r"./option.json", "w") as f:
                 json.dump(self.dj, f, indent=2)
 
             self.main_frame.destroy()
@@ -805,7 +805,7 @@ class Calculator(ctk.CTk):
         if select_color[1]:
             self.dj["color"]["border"] = select_color[1]
 
-            with open(r"calculator/option.json", "w") as f:
+            with open(r"./option.json", "w") as f:
                 json.dump(self.dj, f, indent=2)
 
             self.main_frame.destroy()

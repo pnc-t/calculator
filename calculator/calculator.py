@@ -11,7 +11,11 @@ from PIL import Image, ImageColor, ImageEnhance
 # インストールしたTesseract-OCRのpath)
 TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR"
 TESSDATA_PATH = r"C:\Program Files\Tesseract-OCR\tessdata"
+
+
 IMAGE_DIR = os.path.join(os.path.dirname(__file__), "icon")
+FORMULA_DIR = os.path.join(os.path.dirname(__file__), "formula")
+OPTION_DIR = os.path.join(os.path.dirname(__file__), "option.json")
 
 
 WINDOW_WIDTH = 300
@@ -79,11 +83,11 @@ class Calculator(ctk.CTk):
         self.window_drag()
 
     def load_option(self):
-        if not os.path.isfile(r"./option.json"):
-            with open(r"./option.json", "w") as f:
+        if not os.path.isfile(OPTION_DIR):
+            with open(OPTION_DIR, "w") as f:
                 json.dump(self.dj, f, indent=2)
         else:
-            with open(r"./option.json") as f:
+            with open(OPTION_DIR) as f:
                 self.dj = json.load(f)
 
     def set_ctkform(self):
@@ -535,9 +539,8 @@ class Calculator(ctk.CTk):
 
     def load_canvas(self):
 
-        path = r"formula"
-        ps_path = os.path.join(path, r"img.ps")
-        png_path = os.path.join(path, r"img.png")
+        ps_path = os.path.join(FORMULA_DIR, r"img.ps")
+        png_path = os.path.join(FORMULA_DIR, r"img.png")
         if os.path.isfile(png_path):
             os.remove(png_path)
             os.remove(ps_path)
@@ -560,18 +563,13 @@ class Calculator(ctk.CTk):
 
         tools = pyocr.get_available_tools()
         tool = tools[0]
-
         builder = pyocr.builders.TextBuilder(tesseract_layout=6)
-
         img = Image.open(png_path)
-
         img_g = img.convert("L")
         img_g.point(lambda x: 0 if x < 230 else x)
         enhancer = ImageEnhance.Contrast(img_g)
         img_con = enhancer.enhance(2.0)
-
         txt_pyocr = tool.image_to_string(img_con, lang="eng", builder=builder)
-
         txt_pyocr = txt_pyocr.replace(" ", "")
         self.calc_num = self.calc_num + txt_pyocr
         self.calc_var.set(self.calc_num)
@@ -685,13 +683,13 @@ class Calculator(ctk.CTk):
         self.dj["color"]["command"]["hover"] = COM_HOVER_COLOR
         self.dj["color"]["button_text"] = BUTTONTEXT_COLOR
 
-        with open(r"./option.json", "w") as f:
+        with open(OPTION_DIR, "w") as f:
             json.dump(self.dj, f, indent=2)
         self.set_button()
 
         if self.dj["color"]["theme"] != THEME_COLOR:
             self.dj["color"]["theme"] = THEME_COLOR
-            with open(r"./option.json", "w") as f:
+            with open(OPTION_DIR, "w") as f:
                 json.dump(self.dj, f, indent=2)
             self.main_frame.destroy()
             self.option_flag = 0
@@ -703,7 +701,7 @@ class Calculator(ctk.CTk):
 
         if self.dj["color"]["border"] != BORDER_COLOR:
             self.dj["color"]["border"] = BORDER_COLOR
-            with open(r"./option.json", "w") as f:
+            with open(OPTION_DIR, "w") as f:
                 json.dump(self.dj, f, indent=2)
             self.main_frame.destroy()
             self.option_flag = 0
@@ -739,7 +737,7 @@ class Calculator(ctk.CTk):
             self.dj["color"]["number"]["fg"] = num_color
             self.dj["color"]["number"]["hover"] = num_hover_color
 
-            with open(r"./option.json", "w") as f:
+            with open(OPTION_DIR, "w") as f:
                 json.dump(self.dj, f, indent=2)
             self.set_button()
 
@@ -751,7 +749,7 @@ class Calculator(ctk.CTk):
             self.dj["color"]["command"]["fg"] = com_color
             self.dj["color"]["command"]["hover"] = com_hover_color
 
-            with open(r"./option.json", "w") as f:
+            with open(OPTION_DIR, "w") as f:
                 json.dump(self.dj, f, indent=2)
             self.set_button()
             self.dif_button.destroy()
@@ -780,7 +778,7 @@ class Calculator(ctk.CTk):
 
             self.dj["color"]["button_text"] = text_color
 
-            with open(r"./option.json", "w") as f:
+            with open(OPTION_DIR, "w") as f:
                 json.dump(self.dj, f, indent=2)
             self.set_button()
 
@@ -789,7 +787,7 @@ class Calculator(ctk.CTk):
         if select_color[1]:
             self.dj["color"]["theme"] = select_color[1]
 
-            with open(r"./option.json", "w") as f:
+            with open(OPTION_DIR, "w") as f:
                 json.dump(self.dj, f, indent=2)
 
             self.main_frame.destroy()
@@ -805,7 +803,7 @@ class Calculator(ctk.CTk):
         if select_color[1]:
             self.dj["color"]["border"] = select_color[1]
 
-            with open(r"./option.json", "w") as f:
+            with open(OPTION_DIR, "w") as f:
                 json.dump(self.dj, f, indent=2)
 
             self.main_frame.destroy()

@@ -8,7 +8,7 @@ import pyocr
 import pyocr.builders
 from PIL import Image, ImageColor, ImageEnhance
 
-# インストールしたTesseract-OCRのpath)
+# インストールしたTesseract-OCRのpathを指定
 TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR"
 TESSDATA_PATH = r"C:\Program Files\Tesseract-OCR\tessdata"
 
@@ -91,8 +91,8 @@ class Calculator(ctk.CTk):
                 self.dj = json.load(f)
 
     def set_ctkform(self):
-        ctk.set_appearance_mode("dark")  # Modes: system (default), light, dark
-        ctk.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
+        ctk.set_appearance_mode("dark")
+        ctk.set_default_color_theme("blue")
 
     def set_main_window(self):
         self.main_frame = ctk.CTkFrame(
@@ -172,19 +172,6 @@ class Calculator(ctk.CTk):
         )
         self.dif_button.pack(side=ctk.RIGHT, pady=(2, 0))
 
-        # self.mini_button = ctk.CTkButton(
-        #     self.title_bar,
-        #     width=30,
-        #     height=20,
-        #     text="",
-        #     image=img,
-        #     corner_radius=0,
-        #     fg_color="#000000",
-        #     hover_color="#010101",
-        #     command=self.withdraw,
-        # )
-        # self.mini_button.pack(side=ctk.RIGHT)
-        # self.mini_button.configure(anchor=ctk.CENTER)
 
     # title_bar
     def option_raise(self):
